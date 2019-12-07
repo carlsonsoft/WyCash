@@ -1,6 +1,11 @@
 using System;
+using System.Linq.Expressions;
 using WyCash.Lib;
 using Xunit;
+
+namespace WyCash.Lib
+{
+}
 
 namespace WyCash.Tests
 {
@@ -9,26 +14,36 @@ namespace WyCash.Tests
         [Fact]
         public void TestMultiplication()
         {
-            Money five = Money.CreateDollar(5);
-            Assert.Equal(Money.CreateDollar(10), five.Times(2));
-            Assert.Equal(Money.CreateDollar(15),  five.Times(3));
+            Money five = Money.Dollar(5);
+            Assert.Equal(Money.Dollar(10), five.Times(2));
+            Assert.Equal(Money.Dollar(15), five.Times(3));
         }
+
         [Fact]
         public void TestEqulity()
         {
-            Assert.True(Money.CreateDollar(5).Equals(Money.CreateDollar(5)));
-            Assert.False(Money.CreateDollar(5).Equals(Money.CreateDollar(6)));
-            Assert.True(Money.CreateFranc(5).Equals(Money.CreateFranc(5)));
-            Assert.False(Money.CreateFranc(5).Equals(Money.CreateFranc(6)));
-            Assert.False(Money.CreateFranc(5).Equals(Money.CreateDollar(5)));
+            Assert.True(Money.Dollar(5).Equals(Money.Dollar(5)));
+            Assert.False(Money.Dollar(5).Equals(Money.Dollar(6)));
+            Assert.False(Money.Franc(5).Equals(Money.Dollar(5)));
         }
+
         [Fact]
-        public void TestFrancMultiplication()
+        public void TestSimpleAddition()
         {
-            Money five = Money.CreateFranc(5);
-            Assert.Equal(Money.CreateFranc(10), five.Times(2));
-            Assert.Equal(Money.CreateFranc(15), five.Times(3));
+            Money five = Money.Dollar(5);
+            IBankExpression result = five.Plus(five);
+            Sum sum = (Sum) result;
+            Assert.Equal(five, sum.Augend);
         }
+
+        [Fact]
+        public void TestReduceMoney()
+        {
+            var bank = new Bank();
+            var result = bank.Reduce(Money.Dollar(1), "USD");
+            Assert.Equal(Money.Dollar(1),result);
+        }
+
         //TODO:法郎兑美元2：1
         // 5美元* 2=10美元
         // 将amount定义为私有
