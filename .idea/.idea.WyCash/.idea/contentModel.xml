@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\10050476\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
@@ -22,6 +22,7 @@
             </e>
           </e>
         </e>
+        <e p="Pair.cs" t="Include" />
         <e p="Sum.cs" t="Include" />
         <e p="WyCash.Lib.csproj" t="IncludeRecursive" />
       </e>
